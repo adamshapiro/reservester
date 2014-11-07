@@ -1,5 +1,8 @@
 class RestaurantsController < ApplicationController
 
+	before_action :require_login, only: [:new,:create]
+	before_action :require_current_user, only: [:update,:edit,:destroy, :delete]
+
 	def new
 		@restaurant = Restaurant.new
 	end
@@ -9,7 +12,8 @@ class RestaurantsController < ApplicationController
 	end
 
 	def create
-		@restaurant = Restaurant.new(restaurant_params)
+		@owner = current_user
+		@restaurant = @owner.restaurants.create(restaurant_params)
 
 		if @restaurant.save
 			redirect_to @restaurant
@@ -20,6 +24,7 @@ class RestaurantsController < ApplicationController
 
 	def show
 		@restaurant = Restaurant.find(params[:id])
+		@owner = @restaurant.user
 	end
 
 	def edit
@@ -46,5 +51,21 @@ class RestaurantsController < ApplicationController
 	private
 	def restaurant_params
 		params.require(:restaurant).permit(:name,:description,:address, :city, :zipcode, :state, :phone)
+	end
+
+	def require_login
+		unless logged_in?
+			flash[:alert] = "You must be logged in to perform this action."
+			redirect_to login_path
+		end
+	end
+	def require_current_user
+		@restaurant = Restaurant.find(params[:id])
+		unless current_user == @restaurant.user
+			flash[:alert] = "You must be the restaurant's owner to perform this action."
+			if !logged_in?
+				redirect_to login_path
+			end
+		end
 	end
 end

@@ -1,3 +1,8 @@
+<% if current_user == @owner %>
 <h1>Edit the Restaurant Info</h1>
 
 <%= render 'form' %>
+<% else %>
+<% flash[:alert] = "You must be the restaurant's owner to perform this action." %>
+<% redirect_to :root %>
+<% end %>
