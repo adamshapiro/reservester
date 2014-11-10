@@ -38,6 +38,28 @@
   <%= @restaurant.phone %>
 </p>
 
+<% if !logged_in? || current_user.id  != @owner.id %>
+<%= render 'reservations/form' %>
+<% else %>
+<% @reservations = Reservation.all %>
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Date</th>
+    <th>Time</th>
+  </tr>
+
+  <% @reservations.each do |reservation| %>
+  <tr>
+    <td><%= reservation.email %></td>
+    <td><%= reservation.date %></td>
+    <td><%= reservation.time %></td>
+    <%= link_to 'Confirm', reserve_path(reservation), method: :delete %>
+  </tr>
+  <% end %>
+</table>
+<% end %>
+
 <%= link_to 'Back', restaurants_path %> | <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> | <%= link_to 'Delete', restaurant_path(@restaurant), method: :delete %>
 
 <% restaurant_location = "#{@restaurant.address.gsub(" ","+")}+#{@restaurant.city}+#{@restaurant.state}" %>

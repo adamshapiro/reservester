@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
+  get 'reserve' => 'reservations#new'
+  post 'reserve' => 'reservations#create'
+  delete 'reserve' => 'reservations#destroy'
+
   root to: 'restaurants#index'
 end

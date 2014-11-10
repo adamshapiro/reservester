@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  date: MyString
+  restaurant: MyString
+
+two:
+  email: MyString
+  date: MyString
+  restaurant: MyString
