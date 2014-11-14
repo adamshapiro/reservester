@@ -12,6 +12,15 @@ class UsersController < ApplicationController
   def show
   end
 
+  def dashboard
+    if logged_in?
+      @user = current_user
+    else
+      flash[:alert] = "You must be logged in to view the dashboard."
+      redirect_to login_path
+    end
+  end
+
   # GET /users/new
   def new
     @user = User.new

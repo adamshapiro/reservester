@@ -41,7 +41,7 @@
 <% if !logged_in? || current_user.id  != @owner.id %>
 <%= render 'reservations/form' %>
 <% else %>
-<% @reservations = Reservation.all %>
+<% @reservations = @restaurant.reservations.all %>
 <table>
   <tr>
     <th>Email</th>
@@ -54,7 +54,7 @@
     <td><%= reservation.email %></td>
     <td><%= reservation.date %></td>
     <td><%= reservation.time %></td>
-    <%= link_to 'Confirm', reserve_path(reservation), method: :delete %>
+    <td><%= link_to 'Confirm', reserve_path(reservation), method: :delete %></td>
   </tr>
   <% end %>
 </table>

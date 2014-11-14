@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  root to: 'restaurants#index'
+
   get 'sessions/new'
 
   resources :users
 
   resources :restaurants
+
+  get 'dashboard' => 'users#dashboard'
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
@@ -13,5 +17,4 @@ Rails.application.routes.draw do
   post 'reserve' => 'reservations#create'
   delete 'reserve' => 'reservations#destroy'
 
-  root to: 'restaurants#index'
 end

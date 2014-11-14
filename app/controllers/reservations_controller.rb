@@ -18,9 +18,10 @@ class ReservationsController < ApplicationController
 	end
 
 	def destroy
-		@reservation = Reservation.find(params[:id])
+		@reservation = Reservation.find_by(params[:id])
 		@reservation.destroy
-		flash.now[:notice] = "Reservation confirmed."
+		flash[:notice] = "Reservation confirmed."
+		redirect_to @restaurant
 	end
 
 

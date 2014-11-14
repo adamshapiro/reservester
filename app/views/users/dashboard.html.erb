@@ -1,0 +1,41 @@
+<h1>Dashboard</h1>
+
+<% @restaurants = current_user.restaurants.all %>
+<% @restaurants.each do |restaurant| %>
+<p>----------------------------------------------------------------------------------</p>
+<p>
+  <strong>Name:</strong>
+  <%= restaurant.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= restaurant.description %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= restaurant.address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= restaurant.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= restaurant.state %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= restaurant.zipcode %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= restaurant.phone %>
+</p>
+
+<% end %>
