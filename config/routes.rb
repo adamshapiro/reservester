@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'users#dashboard'
 
+  post 'users/:id/role_change' => 'users#role_change'
+
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'

@@ -1,8 +1,20 @@
+
+
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
+</p>
+<p>
+	<strong>Role:</strong>
+	<%= @user.role %>
+</p>
+<p>
+	Change Your Role:
+	<%= form_tag "#{params[:id]}/role_change", method: "post" do %> 
+		<button value="role_change">Change Role</button>
+	<% end %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

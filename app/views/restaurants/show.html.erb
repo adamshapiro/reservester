@@ -38,7 +38,7 @@
   <%= @restaurant.phone %>
 </p>
 
-<% if !logged_in? || current_user.id  != @owner.id %>
+<% unless owner? %>
 <%= render 'reservations/form' %>
 <% else %>
 <% @reservations = @restaurant.reservations.all %>
